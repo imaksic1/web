@@ -1,9 +1,16 @@
 package com.maxa.web;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 @RestController
-public class PlusControleler {
+public class PlusController {
 
     @GetMapping("/ucenik")
     String ajd() {
@@ -38,5 +45,23 @@ public class PlusControleler {
     @PutMapping("/unos/{userId}")
     public String updateUser1(@PathVariable String userId, @RequestBody Korisnik kor) {
         return kor.getPrezime() + " " + kor.getIme() + " " + userId;
+    }
+
+    @PostMapping("/")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file,
+                                   RedirectAttributes redirectAttributes) {
+        if (file.isEmpty()){
+            return "Fajl " +file.getOriginalFilename()+" je prazan !";
+        }
+        try {
+            File convFile = new File(file.getOriginalFilename());
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(file.getBytes());
+            fos.flush();
+            fos.close();
+        }catch (IOException e){}
+
+        return "OK";
     }
 }
