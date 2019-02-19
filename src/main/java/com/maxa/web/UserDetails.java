@@ -1,6 +1,11 @@
 package com.maxa.web;
 
+
+
+//@Entity
+//@Table(name = "userDetails")
 public class UserDetails {
+
     private String firstName;
     private String lastName;
     private String address;
