@@ -1,7 +1,7 @@
 package com.maxa.web.controller;
 
 import com.maxa.web.Professor;
-import com.maxa.web.UserDetails;
+import com.maxa.web.model.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +46,8 @@ public class PlusController {
 
     }
 
-    @PutMapping("/updateUser/{userId}")
-    public String updateUser(@PathVariable Integer userId) {
+    @PutMapping("/updUser/{userId}")
+    public String updUser(@PathVariable Integer userId) {
         return "You wrote: " + userId;
     }
 
@@ -57,18 +57,18 @@ public class PlusController {
     }
 
     @PostMapping("/")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
+    public String handleFileUpload(@RequestParam("file") MultipartFile uploadFile,
                                    RedirectAttributes redirectAttributes) {
-        if (file.isEmpty()){
-            return "Fajl " +file.getOriginalFilename()+" is empty!";
+        if (uploadFile.isEmpty()){
+            return "Fajl " +uploadFile.getOriginalFilename()+" is empty!";
         }
         try {
-            File convFile = new File(file.getOriginalFilename());
+            File convFile = new File(uploadFile.getOriginalFilename());
             convFile.createNewFile();
-            FileOutputStream fos = new FileOutputStream(convFile);
-            fos.write(file.getBytes());
-            fos.flush();
-            fos.close();
+            FileOutputStream fileToWrite = new FileOutputStream(convFile);
+            fileToWrite.write(uploadFile.getBytes());
+            fileToWrite.flush();
+            fileToWrite.close();
         }catch (IOException e){}
         return "OK";
     }
