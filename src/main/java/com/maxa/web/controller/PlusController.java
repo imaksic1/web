@@ -34,16 +34,14 @@ public class PlusController {
     @PostMapping(path = "/userDetails")
     public Professor userDetails(@RequestBody UserDetails userDetails) {
         Professor k1 = new Professor();
-        k1.setFirstName(userDetails.getFirstName()+" "+userDetails.getAddress());
+        k1.setFirstName(userDetails.getFirstName() + " " + userDetails.getAddress());
         k1.setLastName(userDetails.getLastName());
         return k1;
     }
 
     @DeleteMapping("/deleteUser/{userId}")
-    public String deleteUser(@PathVariable String userId)
-    {
-         return "DELETE - Out of service";
-
+    public String deleteUser(@PathVariable String userId) {
+        return "DELETE - Out of service";
     }
 
     @PutMapping("/updUser/{userId}")
@@ -59,8 +57,8 @@ public class PlusController {
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile uploadFile,
                                    RedirectAttributes redirectAttributes) {
-        if (uploadFile.isEmpty()){
-            return "Fajl " +uploadFile.getOriginalFilename()+" is empty!";
+        if (uploadFile.isEmpty()) {
+            return "Fajl " + uploadFile.getOriginalFilename() + " is empty!";
         }
         try {
             File convFile = new File(uploadFile.getOriginalFilename());
@@ -69,7 +67,8 @@ public class PlusController {
             fileToWrite.write(uploadFile.getBytes());
             fileToWrite.flush();
             fileToWrite.close();
-        }catch (IOException e){}
+        } catch (IOException e) {
+        }
         return "OK";
     }
 }

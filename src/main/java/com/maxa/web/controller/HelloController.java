@@ -13,30 +13,33 @@ public class HelloController {
     String professor() {
         return "Zoki";
     }
+
     @GetMapping("/lessonName")
-    public String getLessonName (@RequestParam("lessonName") String lessonName){
+    public String getLessonName(@RequestParam("lessonName") String lessonName) {
         return lessonName;
     }
+
     @GetMapping("/lessonNumber")
-    public Integer getLessonNumber (@RequestParam(value = "lessonNumber", required=false) Integer lessonNumber){
-        if (lessonNumber==null){
+    public Integer getLessonNumber(@RequestParam(value = "lessonNumber", required = false) Integer lessonNumber) {
+        if (lessonNumber == null) {
             return -1;
         }
         return lessonNumber;
     }
+
     @GetMapping("/studentId/{student}")
-    public Integer studentId(@PathVariable Integer student)
-    {
+    public Integer studentId(@PathVariable Integer student) {
         return student;
     }
+
     @GetMapping("/game/{playerId}")
-    public String playerId(@PathVariable String playerId)
-    {
-        return "You wrote: "+playerId;
+    public String playerId(@PathVariable String playerId) {
+        return "You wrote: " + playerId;
     }
+
     @GetMapping("/surface")
-    Integer surface(@RequestParam("wide") Integer wide,@RequestParam("lengthy") Integer lengthy) {
+    Integer surface(@RequestParam("wide") Integer wide, @RequestParam("lengthy") Integer lengthy) {
         Calculate pom = new Calculate();
-        return pom.multiply(wide,lengthy);
+        return pom.multiply(wide, lengthy);
     }
 }

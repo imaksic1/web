@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="User")
+@Table(name = "User")
 public class UserDetails {
 
     @Id
@@ -25,29 +25,49 @@ public class UserDetails {
     @Column(name = "address")
     private String address;
 
+    String nickName;
+    Integer age;
+
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
-    UserDetails(){
-        firstName="";
-        lastName="";
-        address="";
+
+    public String getNickName() {
+        return nickName;
     }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     @Override
     public String toString() {
         return "UserDetails{" +
@@ -55,6 +75,8 @@ public class UserDetails {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", age=" + age +
                 '}';
     }
 }

@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 //@EntityScan( basePackages = {"com.maxa.web.model"} )
 public class WebApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WebApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WebApplication.class, args);
+    }
 
 }
 
