@@ -1,15 +1,12 @@
 package com.maxa.web.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import java.util.Date;
@@ -26,12 +23,11 @@ public class UserPost {
     @Column(name = "user_id")
     private Long userId;
 
-    @Lob
     @Column(name = "user_post")
     private String userPost;
 
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="dd.MM.yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date created;
 
     public Long getUserId() {

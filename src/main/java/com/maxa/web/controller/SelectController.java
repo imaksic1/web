@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.swing.text.html.Option;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,40 +82,40 @@ public class SelectController {
     }
 
     @GetMapping("/likeFirstName/{firstName}")
-    public Optional<List<UserDetails>> likeFirstName(@PathVariable String firstName) {
-        Optional<List<UserDetails>> accept;
+    public List<UserDetails> likeFirstName(@PathVariable String firstName) {
+        List<UserDetails> accept;
         if (firstName.length()>2){
             accept=userRepo.findByFirstNameStartingWithIgnoreCase(firstName);
             return accept;
         }else {
-            return Optional.empty();
+            return new LinkedList<>();
         }
     }
 
     @GetMapping("/likeLastName/{lastName}")
-    public Optional<List<UserDetails>> likeLastName(@PathVariable String lastName) {
+    public List<UserDetails> likeLastName(@PathVariable String lastName) {
         if (lastName.length()>2){
             return userRepo.findByLastNameStartingWithIgnoreCase(lastName);
         }else {
-            return Optional.empty();
+            return new LinkedList<>();
         }
     }
 
     @GetMapping("/likeAddress/{address}")
-    public Optional<List<UserDetails>> likeAddress(@PathVariable String address) {
+    public List<UserDetails> likeAddress(@PathVariable String address) {
         if (address.length()>2){
             return userRepo.findByAddressStartingWithIgnoreCase(address);
         }else {
-            return Optional.empty();
+            return new LinkedList<>();
         }
     }
 
     @GetMapping("/likeNickName/{nickName}")
-    public Optional<List<UserDetails>> likeNickName(@PathVariable String nickName) {
+    public List<UserDetails> likeNickName(@PathVariable String nickName) {
         if (nickName.length()>2){
             return userRepo.findByNickNameStartingWithIgnoreCase(nickName);
         }else {
-            return Optional.empty();
+            return new LinkedList<>();
         }
     }
 

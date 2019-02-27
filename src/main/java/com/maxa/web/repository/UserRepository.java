@@ -31,12 +31,12 @@ public interface UserRepository extends CrudRepository<UserDetails, Long> {
 
     List<UserDetails> findByAge(Integer age);
 
-    Optional <List<UserDetails>> findByFirstNameStartingWithIgnoreCase(String firstName);
+    List<UserDetails> findByFirstNameStartingWithIgnoreCase(String firstName);
 
-    Optional <List<UserDetails>> findByLastNameStartingWithIgnoreCase(String lastName);
+    List<UserDetails> findByLastNameStartingWithIgnoreCase(String lastName);
 
-    Optional <List<UserDetails>> findByAddressStartingWithIgnoreCase(String address);
+    List<UserDetails> findByAddressStartingWithIgnoreCase(String address);
 
-    Optional <List<UserDetails>> findByNickNameStartingWithIgnoreCase(String nickName);
+    List<UserDetails> findByNickNameStartingWithIgnoreCase(String nickName);
 
 }

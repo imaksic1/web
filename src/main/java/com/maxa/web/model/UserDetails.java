@@ -25,7 +25,10 @@ public class UserDetails {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "nick_name")
     String nickName;
+
+    @Column(name = "age")
     Integer age;
 
     public String getFirstName() {
