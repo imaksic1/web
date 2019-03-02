@@ -1,8 +1,11 @@
 package com.maxa.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +32,8 @@ public class ComputerParts {
     @Column(name = "producer")
     private String producer;
 
-    @OneToMany(mappedBy = "computerParts",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "computerParts",cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<AssembleComputer> assembleComputer=new ArrayList<>();
 
     public Long getId() {

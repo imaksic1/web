@@ -1,8 +1,12 @@
 package com.maxa.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,8 +31,8 @@ public class Computer {
     @Column(name = "price")
     private Double price;
 
-    @OneToMany(mappedBy = "computer",cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JoinColumn(name = "computer_id")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "computer",cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<AssembleComputer> assembleComputer=new ArrayList<>();
 
     public Long getId() {
