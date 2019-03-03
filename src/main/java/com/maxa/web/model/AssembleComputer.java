@@ -31,6 +31,8 @@ public class AssembleComputer {
     @JoinColumn(name = "computer_parts_id")
     private ComputerParts computerParts;
 
+    public AssembleComputer(){}
+
     public Long getId() {
         return id;
     }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -40,8 +41,16 @@ public class ComputerController {
     }
 
     @GetMapping("/selectAllComputer")
-    List<Computer> selectAllComputer() {
-        return compRepo.findAll();
+    List<ComputerJson> selectAllComputer() {
+        List<Computer> allComputers=compRepo.findAll();
+        List<ComputerJson> allComputersJson = new LinkedList<>();
+        for (int i=0; i<allComputers.size();i++){
+            ComputerJson computersJson = new ComputerJson();
+            computersJson.setComputerName(allComputers.get(i).getComputerName());
+            computersJson.setPrice(allComputers.get(i).getPrice());
+            allComputersJson.add(computersJson);
+        }
+        return allComputersJson;
     }
 
     @DeleteMapping("/delComputer/{compId}")
@@ -89,8 +98,17 @@ public class ComputerController {
     }
 
     @GetMapping("/selectAllComputerParts")
-    List<ComputerParts> selectAllComputerParts() {
-        return partsRepo.findAll();
+    List<ComputerPartsJson> selectAllComputerParts() {
+        List<ComputerParts> allComputerParts = partsRepo.findAll();
+        List<ComputerPartsJson> allComputerPartsJson = new LinkedList<>();
+        for (int i=0; i<allComputerParts.size();i++){
+            ComputerPartsJson computerPartsJson = new ComputerPartsJson();
+            computerPartsJson.setPartType(allComputerParts.get(i).getPartType());
+            computerPartsJson.setPrice(allComputerParts.get(i).getPrice());
+            computerPartsJson.setProducer(allComputerParts.get(i).getProducer());
+            allComputerPartsJson.add(computerPartsJson);
+        }
+        return allComputerPartsJson;
     }
 
     @DeleteMapping("/delPart/{partId}")

@@ -1,5 +1,7 @@
 package com.maxa.web.controller;
 
+import com.maxa.web.dto.AssembleComputerDTO;
+import com.maxa.web.dto.AssembleCopmuterMapper;
 import com.maxa.web.model.AssembleComputer;
 import com.maxa.web.model.Computer;
 import com.maxa.web.model.ComputerParts;
@@ -29,6 +31,7 @@ public class AssembleController {
 
     @Autowired
     AssembleRepository assembleRepo;
+
 
     @PostMapping("/addAssemble/{computerId}")
     String addAssemble(@RequestParam("computerId") Long computerId, @RequestParam("computerPartId") Long computerPartId) {
@@ -60,26 +63,38 @@ public class AssembleController {
     }
 
     @GetMapping("/selectAllAssemble")
-    List<AssembleComputer> selectAllAssemble() {
-        return assembleRepo.findAll();
+    List<AssembleComputerDTO> selectAllAssemble() {
+        List<AssembleComputer> assemble = assembleRepo.findAll();
+        return AssembleCopmuterMapper.INSTANCE.assembleToAssembleDTO(assemble);
+    }
+
+    @GetMapping("/selectOneAssemble/{oneAssemble}")
+    AssembleComputerDTO selectOneAssemble(@RequestParam("oneAssemble") Long oneAssemble) {
+        AssembleComputer assemble = assembleRepo.findById(oneAssemble);
+        if (assemble==null){
+            return new AssembleComputerDTO();
+        }
+        return AssembleCopmuterMapper.INSTANCE.assembleToAssembleDTO(assemble);
     }
 
     @GetMapping("/selectAssemblePart/{computerParts}")
-    List<AssembleComputer> selectAssemblePart(@RequestParam("assembleParts") Long computerParts) {
+    List<AssembleComputerDTO> selectAssemblePart(@RequestParam("assembleParts") Long computerParts) {
         ComputerParts findPart = partsRepo.findById(computerParts);
         if (findPart == null) {
-            return new LinkedList<AssembleComputer>();
+            return new LinkedList<AssembleComputerDTO>();
         }
-        return assembleRepo.findByComputerParts(findPart);
+        List<AssembleComputer> assemble = assembleRepo.findByComputerParts(findPart);
+        return AssembleCopmuterMapper.INSTANCE.assembleToAssembleDTO(assemble);
     }
 
     @GetMapping("/selectAssembleComputer/{computer}")
-    List<AssembleComputer> selectAssembleComputer(@RequestParam("computer") Long computer) {
+    List<AssembleComputerDTO> selectAssembleComputer(@RequestParam("computer") Long computer) {
         Computer findComputer = compRepo.findById(computer);
         if (findComputer == null) {
-            return new LinkedList<AssembleComputer>();
+            return new LinkedList<AssembleComputerDTO>();
         }
-        return assembleRepo.findByComputer(findComputer);
+        List<AssembleComputer> assemble = assembleRepo.findByComputer(findComputer);
+        return AssembleCopmuterMapper.INSTANCE.assembleToAssembleDTO(assemble);
     }
 
     @PutMapping("/updateAssemble/{id}")
