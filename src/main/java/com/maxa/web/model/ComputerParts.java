@@ -1,6 +1,7 @@
 package com.maxa.web.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Computer_Parts")
+@Data
 public class ComputerParts {
 
     @Id
@@ -35,44 +37,4 @@ public class ComputerParts {
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "computerParts",cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<AssembleComputer> assembleComputer=new ArrayList<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPartType() {
-        return partType;
-    }
-
-    public void setPartType(String partType) {
-        this.partType = partType;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getProducer() {
-        return producer;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
-    }
-
-    public List<AssembleComputer> getAssembleComputer() {
-        return assembleComputer;
-    }
-
-    public void setAssembleComputer(List<AssembleComputer> assembleComputer) {
-        this.assembleComputer = assembleComputer;
-    }
 }

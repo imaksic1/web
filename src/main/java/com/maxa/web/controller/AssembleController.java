@@ -32,6 +32,8 @@ public class AssembleController {
     @Autowired
     AssembleRepository assembleRepo;
 
+    @Autowired
+    AssembleCopmuterMapper assembleCopmuterMapper;
 
     @PostMapping("/addAssemble/{computerId}")
     String addAssemble(@RequestParam("computerId") Long computerId, @RequestParam("computerPartId") Long computerPartId) {
@@ -65,7 +67,7 @@ public class AssembleController {
     @GetMapping("/selectAllAssemble")
     List<AssembleComputerDTO> selectAllAssemble() {
         List<AssembleComputer> assemble = assembleRepo.findAll();
-        return AssembleCopmuterMapper.INSTANCE.assembleToAssembleDTO(assemble);
+        return assembleCopmuterMapper.assembleToAssembleDTO(assemble);
     }
 
     @GetMapping("/selectOneAssemble/{oneAssemble}")
@@ -74,7 +76,7 @@ public class AssembleController {
         if (assemble==null){
             return new AssembleComputerDTO();
         }
-        return AssembleCopmuterMapper.INSTANCE.assembleToAssembleDTO(assemble);
+        return assembleCopmuterMapper.assembleToAssembleDTO(assemble);
     }
 
     @GetMapping("/selectAssemblePart/{computerParts}")
@@ -84,7 +86,7 @@ public class AssembleController {
             return new LinkedList<AssembleComputerDTO>();
         }
         List<AssembleComputer> assemble = assembleRepo.findByComputerParts(findPart);
-        return AssembleCopmuterMapper.INSTANCE.assembleToAssembleDTO(assemble);
+        return assembleCopmuterMapper.assembleToAssembleDTO(assemble);
     }
 
     @GetMapping("/selectAssembleComputer/{computer}")
@@ -94,7 +96,7 @@ public class AssembleController {
             return new LinkedList<AssembleComputerDTO>();
         }
         List<AssembleComputer> assemble = assembleRepo.findByComputer(findComputer);
-        return AssembleCopmuterMapper.INSTANCE.assembleToAssembleDTO(assemble);
+        return assembleCopmuterMapper.assembleToAssembleDTO(assemble);
     }
 
     @PutMapping("/updateAssemble/{id}")

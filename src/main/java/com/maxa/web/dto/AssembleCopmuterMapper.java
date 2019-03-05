@@ -8,10 +8,10 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface  AssembleCopmuterMapper {
 
-    AssembleCopmuterMapper INSTANCE = Mappers.getMapper( AssembleCopmuterMapper.class );
+//    AssembleCopmuterMapper INSTANCE = Mappers.getMapper( AssembleCopmuterMapper.class );
 
     @Mappings({
             @Mapping(source = "computer.computerName", target = "computerName"),
